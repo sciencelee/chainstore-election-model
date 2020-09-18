@@ -132,6 +132,38 @@ def load_county(f):
     return us_county
 
 
+def load_dists(f):
+    '''
+    Get the dataFrame of US Congressional Districts info
+    
+    Project specific function to load the county df from json containing polygon info for each county
+    
+    Parameters:
+    f (str): file path
+    
+    Returns:
+    us_county (DataFrame): dataframe of US counties
+    '''
+    
+    dist_path = f
+
+    cur_json = json.load(open(dist_path, encoding='ISO-8859-1'))
+    path,ext = os.path.splitext(dist_path)
+    new_path = path+"_new"+ext
+
+    with open(new_path,"w", encoding='utf-8') as jsonfile:
+        json.dump(cur_json,jsonfile,ensure_ascii=False)
+
+    us_cong = gpd.read_file(new_path, driver='GeoJSON')
+
+    #us_county['fips'] = us_county['STATE'] + us_county['COUNTY']
+    #us_county = us_county[us_county['STATE'].apply(int) < 57]
+    #us_cong_df = pd.DataFrame(us_cong)
+    #print(us_cong_df.head())
+    
+    return us_cong
+
+
 def csv_encoding_fix(f):
     '''
     fix an encoding issue on a csv file.
@@ -163,18 +195,19 @@ def get_area(fips, us_county_df):
     
 
 # MAPPING FUNCTIONS
-def make_choro(df, geojson, col, color_list, range_color):
+def make_choro(df, geojson, col, color_list, range_color, key='fips', hover='county', labels={'Party':'party'}):
+    
     fig = px.choropleth(df, 
                         geojson=geojson, 
-                        locations='fips', 
+                        locations=key, 
                         color=col,
                         #color_discrete_sequence=px.colors.qualitative.Set1,
                         color_continuous_scale=color_list,
                         range_color=range_color,
                         scope="usa",
-                        labels={'Party':'party'},
-                        hover_name='county',
-                        hover_data=[col, 'party'],
+                        labels=labels,
+                        #hover_name=hover,
+                        hover_data=[col, 'district'],
                     )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.show()
