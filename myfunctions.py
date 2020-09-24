@@ -207,10 +207,11 @@ def make_choro(df, geojson, col, color_list, range_color, key='fips', hover='cou
                         scope="usa",
                         labels=labels,
                         #hover_name=hover,
-                        hover_data=[col, 'district'],
+                        hover_data=[col, hover],
                     )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.show()
+    return fig
 
 
 def add_longlat(df):
