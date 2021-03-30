@@ -1,12 +1,9 @@
 # Classifying Party Politics by the Presence of Chain Stores
 
-* Student name: Aaron Lee
-* Student pace: self paced
-* Scheduled project review date/time: 10/02: 3:00PM CDT
-* Instructor name: Jeff Herman
 * Blog post 1: https://medium.com/@sciencelee/are-you-a-trader-joes-democrat-or-a-walmart-republican-a7b156131435 
 * Blog post 2: https://medium.com/@sciencelee/simple-example-using-boruta-feature-selection-in-python-8b96925d5d7a
-
+* Presentation: https://docs.google.com/presentation/d/1L76n1nCFUE_kYPezSsDZK-VQRnlahtwcVJXMh2_9JbU/edit?usp=sharing
+* Presentation video: https://www.youtube.com/watch?v=2Y-F5O8FyRg
 
 ## Overview
 The chain stores found in a community can tell us a lot about the people that live there. Think about Target and Walmart; what political party do you associate with each? I wanted to investigate that perception, so I built an election model based solely on the number of chain stores in an area.
